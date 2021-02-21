@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Install Poetry",
+        "type": "shell",
+        "command": "poetry install",
+        "windows": {
+          "command": "poetry install"
+        },
+        "group": "none",
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "runOptions": {
+          "runOn": "folderOpen"
+        }
+      }
+    ]
+  }

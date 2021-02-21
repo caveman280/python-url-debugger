@@ -1,0 +1,12 @@
+image:
+  file: .gitpod.Dockerfile
+
+# so far, this project doesn't have ports
+# ports:
+#     - port: 3000
+#       onOpen: open-preview
+tasks:
+    - before: >
+        poetry install
+    - command: >
+        poetry shell
