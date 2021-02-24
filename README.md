@@ -1,48 +1,60 @@
-# Poetry Template
+# URL Debugger
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/caveman280/poetry-python-template)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/caveman280/python-url-debugger)
 
-This is a minimal Python 3.8 application that uses [poetry](https://python-poetry.org) for packaging and dependency management. It also provides [pre-commit](https://pre-commit.com/) hooks (for [Black](https://black.readthedocs.io/en/stable/) and [Flake8](https://flake8.pycqa.org/en/latest/)) and automated tests using [pytest](https://pytest.org/), [Coverage.py](https://coverage.readthedocs.io/) and [GitHub Actions](https://github.com/features/actions). Documentation can be generated with [Sphinx](https://www.sphinx-doc.org/en/master/), and version numbers updated with [bump2version](https://github.com/c4urself/bump2version).
-To use this repository as a template for your own application:
+This is a Python 3.8 CLI application that uses [poetry](https://python-poetry.org) for packaging and dependency management. 
 
-1. [Download and install Poetry](https://python-poetry.org/docs/#installation) following the instructions for your OS.
-1. Name and create your repository
-1. Clone your new repository and make it your working directory
-1. Replace instances of `poetry_template` with your own application name. Edit:
-   - `pyproject.toml`
-   - `tests/test_poetry_template.py`
-   - The `poetry_template` directory name and `poetry_template/__main__.py`
-   - `docs/source/conf.py`
-   - `setup.cfg`
-1. Set up the virtual environment:
+# Use
 
-   ```bash
-   poetry install
-   ```
+This tool allows you to interrogate a URL and find out multiple types of information about given URL(s).
 
-1. Activate the virtual environment (alternatively, ensure any python-related command is preceded by `poetry run`):
+To use the tool, you need to supply it with URL(s) and in exchange, you will be returned a valid JSON file for that URL; including HTTP Status Codes, redirects in place for that URL, headers, remote IP addresses & ports.
 
-   ```bash
-   poetry shell
-   ```
+This could be used in combination with [JQ](https://stedolan.github.io/jq/) to make the output more human readable.
 
-1. Run the main app:
+You can use this CLI in a number of ways. You can supply a single URL:
+```bash
+$ poetry run python url_debugger fetch -u https://www.google.com | jq .
+```
 
-   ```bash
-   poetry run python poetry_template
-   ```
+Or, give it a list of URLs in a text file:
+```bash
+$ echo -en "https://www.google.com\nhttps://www.bbc.co.uk" > urls.txt
+$ poetry run python url_debugger fetch -f urls.txt | jq .
+```
 
-1. Run the tests:
+You could choose to spawn a shell within the virtual environment allowing you to drop the `poetry run`, eg:
+```bash
+# so vscode picks up the venv
+$ poetry config virtualenvs.in-project true
+# install dependencies
+$ poetry install
+# spawn the shell
+$ poetry shell
+# use at your will!
+$ python url_debugger fetch -u https://www.google.com | jq .
+$ python url_debugger fetch -f urls.txt | jq .
+```
 
-   ```bash
-   poetry run pytest
-   ```
+# Development
 
-1. Build the documentation:
+The easiest way to get started on this project is to use [GitPod](https://gitpod.io), as you'll be able to _"Start Fresh with Ephemeral Dev Environments"_, with dependancies automatically installed.
 
-   ```bash
-   sphinx-build -b html docs/source/ docs/build/
-   ```
+# Tests
 
-1. Edit/replace `.py` files as required.
-1. Add new requirements with `poetry add` or by manually adding them to `pyproject.toml`
+Tests are managed in Poetry with [pytest](https://docs.pytest.org/en/stable/) and can be completed with:
+```bash
+$ poetry run test
+```
+
+To execute the tests with code coverage:
+
+```bash
+$ poetry run pytest --cov url_debugger
+```
+
+And for a HTML report of that at htmlcov/index.html
+
+```bash
+$ poetry run coverage html
+```

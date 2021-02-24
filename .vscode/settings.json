@@ -6,5 +6,11 @@
     ],
     "python.linting.pylintPath": "/usr/bin/pylint3",
     "python.languageServer": "Microsoft",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
 }

@@ -7,6 +7,13 @@ image:
 #       onOpen: open-preview
 tasks:
     - before: >
+        export PIP_USER=no &&
+        poetry config virtualenvs.in-project true && 
         poetry install
     - command: >
+        echo "sleeping to allow 30s to install dependancies..." &&
+        sleep 30s &&
         poetry shell
+# vscode:
+#   extensions:
+#     - littlefoxteam.vscode-python-test-adapter@0.6.6:dFrDC47V32ioT4mq1YZKPg==

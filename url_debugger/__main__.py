@@ -1,5 +1,7 @@
+from cli import CLI  # noqa
+
 def main() -> None:
-    print("Hello, world!")
+    CLI()
 
 if __name__ == "__main__":
     main()
